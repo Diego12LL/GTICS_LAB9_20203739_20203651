@@ -64,20 +64,15 @@ public class PartidoController {    //SOLO CAMBIAN ENTIDADES TODO TRANQUI ;v/
         return historialPartidosRepository.encontrarPartido(idEquipo);
     }
 
-
     @GetMapping(value="/getparticipantes")
-    public List<ParticipantesPartido> listarParticipantesXPartido(@RequestParam(value = "idequipo", required = false) Integer idEquipo){
+    public List<ParticipantesPartido> listaParticipantesXPartido(@RequestParam(value = "idequipo", required = false) String idEquipo) {
 
         System.out.println(idEquipo);
-
-        if(idEquipo == null) {
+        if (idEquipo == null) {
             return participantesPartidoRepository.findAll();
         }
-
-        return participantesPartidoRepository.participantesXPartido(idEquipo);
+        int idEquipoint = Integer.parseInt(idEquipo);
+        return participantesPartidoRepository.participantesXPartido(idEquipoint);
     }
-
-
-
 
 }
