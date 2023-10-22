@@ -1,6 +1,7 @@
 package com.example.lab9.Controller;
 
 import com.example.lab9.Entity.Equipo;
+import com.example.lab9.Entity.HistorialPartidos;
 import com.example.lab9.Entity.Participante;
 import com.example.lab9.Entity.Partido;
 import com.example.lab9.Repository.EquipoRepository;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/partido")    //PARA QUE QUE DE ESTA PARTE SE MODIFICÓ LA DB, DEPORTE AHORA ESTÁ EN PARTIDO Y YA NO EN HISTORIALPARTIDOS
@@ -48,8 +51,21 @@ public class PartidoController {    //SOLO CAMBIAN ENTIDADES TODO TRANQUI ;v/
         responseJson.put("estado", "Partido registrado y añadido a historial");
 
         return ResponseEntity.status(HttpStatus.OK).body(responseJson);
-
-
-
     }
+
+    @GetMapping("/gethistorialpartidos")
+    public List<HistorialPartidos> listaHistorialPartidos(@RequestParam(value = "idequipo", required = false) Integer idEquipo) {
+
+        System.out.println(idEquipo);
+        if(idEquipo == null){
+            return historialPartidosRepository.findAll();
+        }
+
+
+        return historialPartidosRepository.encontrarPartido(idEquipo);
+    }
+
+
+
+
 }
