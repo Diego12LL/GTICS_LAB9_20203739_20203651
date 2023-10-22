@@ -23,10 +23,6 @@ public class HistorialPartidos {
     @JoinColumn(name = "partido_idpartido")
     private Partido partido;
 
-    @ManyToOne
-    @JoinColumn(name = "deporte_iddeporte")
-    private Deporte deporte;
-
     @Column(name = "horaFecha", length = 45)
     private Date fechaHora;
 

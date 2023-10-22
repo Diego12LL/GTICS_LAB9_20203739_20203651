@@ -33,5 +33,9 @@ public class Partido {
     @Column(name = "scoreB")
     private Integer scoreB;
 
+    @ManyToOne
+    @JoinColumn(name = "deporte_iddeporte")
+    private Deporte deporte;
+
 
 }
