@@ -2,26 +2,28 @@ package com.example.lab9.Controller;
 
 import com.example.lab9.Entity.Equipo;
 import com.example.lab9.Entity.Participante;
+import com.example.lab9.Entity.ParticipantesPartido;
 import com.example.lab9.Entity.Partido;
-import com.example.lab9.Repository.EquipoRepository;
-import com.example.lab9.Repository.HistorialPartidosRepository;
-import com.example.lab9.Repository.ParticipanteRepository;
-import com.example.lab9.Repository.PartidoRepository;
+import com.example.lab9.Repository.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/partido")    //PARA QUE QUE DE ESTA PARTE SE MODIFICÓ LA DB, DEPORTE AHORA ESTÁ EN PARTIDO Y YA NO EN HISTORIALPARTIDOS
 public class PartidoController {    //SOLO CAMBIAN ENTIDADES TODO TRANQUI ;v/
     final PartidoRepository partidoRepository;
     final HistorialPartidosRepository historialPartidosRepository;
-    public PartidoController(PartidoRepository partidoRepository, HistorialPartidosRepository historialPartidosRepository) {
+
+    final ParticipantesPartidoRepository participantesPartidoRepository;
+    public PartidoController(PartidoRepository partidoRepository, HistorialPartidosRepository historialPartidosRepository, ParticipantesPartidoRepository participantesPartidoRepository) {
         this.partidoRepository = partidoRepository;
         this.historialPartidosRepository = historialPartidosRepository;
+        this.participantesPartidoRepository = participantesPartidoRepository;
     }
     @PostMapping( "/registro")
     public ResponseEntity<HashMap<String, Object>> registrarPartido(
@@ -51,5 +53,9 @@ public class PartidoController {    //SOLO CAMBIAN ENTIDADES TODO TRANQUI ;v/
 
 
 
+    }
+    @GetMapping(value="/getparticipantes")
+    public List<ParticipantesPartido> listarParticipantesXPartido(){
+        return participantesPartidoRepository.findAll();
     }
 }
