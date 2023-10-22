@@ -61,13 +61,20 @@ public class PartidoController {    //SOLO CAMBIAN ENTIDADES TODO TRANQUI ;v/
         if(idEquipo == null){
             return historialPartidosRepository.findAll();
         }
-
-
         return historialPartidosRepository.encontrarPartido(idEquipo);
     }
+
+
     @GetMapping(value="/getparticipantes")
-    public List<ParticipantesPartido> listarParticipantesXPartido(){
-        return participantesPartidoRepository.findAll();
+    public List<ParticipantesPartido> listarParticipantesXPartido(@RequestParam(value = "idequipo", required = false) Integer idEquipo){
+
+        System.out.println(idEquipo);
+
+        if(idEquipo == null) {
+            return participantesPartidoRepository.findAll();
+        }
+
+        return participantesPartidoRepository.participantesXPartido(idEquipo);
     }
 
 
