@@ -57,7 +57,7 @@ public class PartidoController {    //SOLO CAMBIAN ENTIDADES TODO TRANQUI ;v/
     @GetMapping("/gethistorialpartidos")
     public List<HistorialPartidos> listaHistorialPartidos(@RequestParam(value = "idequipo", required = false) Integer idEquipo) {
 
-        System.out.println(idEquipo);
+        System.out.println("Id Equipo: " + idEquipo);
         if(idEquipo == null){
             return historialPartidosRepository.findAll();
         }
@@ -65,14 +65,14 @@ public class PartidoController {    //SOLO CAMBIAN ENTIDADES TODO TRANQUI ;v/
     }
 
     @GetMapping(value="/getparticipantes")
-    public List<ParticipantesPartido> listaParticipantesXPartido(@RequestParam(value = "idequipo", required = false) String idEquipo) {
+    public List<ParticipantesPartido> listaParticipantesXPartido(@RequestParam(value = "idequipo", required = false) Integer idEquipo) {
 
-        System.out.println(idEquipo);
+
         if (idEquipo == null) {
             return participantesPartidoRepository.findAll();
         }
-        int idEquipoint = Integer.parseInt(idEquipo);
-        return participantesPartidoRepository.participantesXPartido(idEquipoint);
+
+        return participantesPartidoRepository.participantesXPartido(idEquipo);
     }
 
 }

@@ -12,11 +12,10 @@ import java.util.List;
 @Repository
 public interface ParticipantesPartidoRepository extends JpaRepository<ParticipantesPartido, Integer>{
 
-    @Query(nativeQuery = true , value = "select pp.idparticipantesPartido, pp.partido_idpartido, pp.participante_idparticipante, pp.horaFecha\n" +
-            "from participantespartido pp\n" +
+    @Query(nativeQuery = true , value = "select * from participantespartido pp\n" +
             "inner join participante p on (pp.participante_idparticipante = p.idparticipante)\n" +
-            "left join partido pa on (pp.partido_idpartido = pa.idpartido)\n" +
-            "where pa.equipoA = ?1 or pa.equipoB = ?1 ;")
-    List<ParticipantesPartido> participantesXPartido(int idEquipo);
+            "inner join partido pa on (pp.partido_idpartido = pa.idpartido)\n" +
+            "where pa.equipoA =:idEquipo or pa.equipoB =:idEquipo ")
+    List<ParticipantesPartido> participantesXPartido(@Param("idEquipo") int idEquipo);
 
 }

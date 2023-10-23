@@ -36,6 +36,4 @@ public class Partido {
     @ManyToOne
     @JoinColumn(name = "deporte_iddeporte")
     private Deporte deporte;
-
-
 }
